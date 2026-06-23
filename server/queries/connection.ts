@@ -111,6 +111,7 @@ export function getDb() {
       instance = wrapWithSafety(rawDb);
     }
     return instance;
+
   } catch (err) {
     console.warn("[DB] Failed to initialize database client (falling back to mock DB):", err);
     return createMockDb();
