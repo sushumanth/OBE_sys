@@ -251,7 +251,10 @@ export default function AppLayout() {
             </button>
           ))}
           <button
-            onClick={logout}
+            onClick={() => {
+              localStorage.setItem("explicit_logout", "true");
+              logout();
+            }}
             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-300 hover:bg-red-500/20 transition-all duration-200"
           >
             <LogOut className="w-[18px] h-[18px] flex-shrink-0" />

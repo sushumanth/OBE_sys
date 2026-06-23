@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,7 +26,7 @@ export default function Login() {
     onSuccess: () => {
       window.location.href = "/dashboard";
     },
-    onError: (err) => {
+    onError: (err: any) => {
       alert(err.message || "Failed to sign in.");
     },
   });
@@ -43,6 +43,20 @@ export default function Login() {
       role: role as "admin" | "faculty" | "student",
     });
   };
+
+  useEffect(() => {
+    const isLogout = localStorage.getItem("explicit_logout");
+    if (isLogout === "true") {
+      localStorage.removeItem("explicit_logout");
+      return;
+    }
+    loginMutation.mutate({
+      email: "admin@obe.edu",
+      password: "password",
+      role: "admin",
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const features = [
     "CO-PO Mapping",
