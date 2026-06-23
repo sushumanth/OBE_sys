@@ -13,7 +13,7 @@ function expressDevServer() {
     name: "express-dev-server",
     configureServer(server: any) {
       console.log("[Vite dev server] Spawning Express backend...");
-      child = spawn("npx", ["tsx", "api/boot.ts"], {
+      child = spawn("npx", ["tsx", "server/boot.ts"], {
         stdio: "inherit",
         shell: true,
         env: {
