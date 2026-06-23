@@ -1,7 +1,7 @@
-import { drizzle } from "drizzle-orm/mysql2";
 import { env } from "../lib/env";
 import * as schema from "@db/schema";
 import * as relations from "@db/relations";
+import { createRequire } from "module";
 
 const fullSchema = { ...schema, ...relations };
 
@@ -98,19 +98,21 @@ function wrapWithSafety(targetObj: any, fallbackValue: any = []): any {
 
 export function getDb() {
   if (!env.databaseUrl) {
-    return createMockDb() as ReturnType<typeof drizzle<typeof fullSchema>>;
+    return createMockDb();
   }
   try {
     if (!instance) {
+      const require = createRequire(import.meta.url);
+      const { drizzle } = require("drizzle-orm/mysql2");
       const rawDb = drizzle(env.databaseUrl, {
         mode: "planetscale",
         schema: fullSchema,
       });
       instance = wrapWithSafety(rawDb);
     }
-    return instance as ReturnType<typeof drizzle<typeof fullSchema>>;
+    return instance;
   } catch (err) {
     console.warn("[DB] Failed to initialize database client (falling back to mock DB):", err);
-    return createMockDb() as ReturnType<typeof drizzle<typeof fullSchema>>;
+    return createMockDb();
   }
 }
