@@ -27,6 +27,9 @@ app.use(
   trpcExpress.createExpressMiddleware({
     router: appRouter,
     createContext,
+    onError({ error, path }) {
+      console.error(`>>> tRPC Error on path "${path}":`, error);
+    },
   })
 );
 
@@ -39,6 +42,12 @@ app.use("/api", (req, res) => {
 if (env.isProduction) {
   serveStaticFiles(app);
 }
+
+// Global Express Error Handler
+app.use((err: any, req: any, res: any, next: any) => {
+  console.error(">>> Express Global Error:", err);
+  res.status(500).json({ error: err.message || "Internal Server Error" });
+});
 
 if (process.env.VERCEL !== "1") {
   const port = parseInt(process.env.PORT || "3001");
