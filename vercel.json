@@ -1,6 +1,11 @@
 {
   "version": 2,
   "outputDirectory": "dist/public",
+  "functions": {
+    "api/boot.ts": {
+      "includeFiles": "server/**"
+    }
+  },
   "rewrites": [
     {
       "source": "/api/(.*)",
