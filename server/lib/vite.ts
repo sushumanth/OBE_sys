@@ -28,3 +28,4 @@ export function serveStaticFiles(app: Express) {
     }
   });
 }
+
