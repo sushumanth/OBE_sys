@@ -86,7 +86,7 @@ export default function PsoManagement() {
       </div>
 
       <div className="grid grid-cols-1 gap-4">
-        {displayPSOs.map((pso) => (
+        {displayPSOs.map((pso: any) => (
           <Card key={pso.id} className="border-0 shadow-md rounded-2xl group">
             <CardContent className="p-5">
               <div className="flex items-start gap-4">

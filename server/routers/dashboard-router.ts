@@ -48,11 +48,11 @@ export const dashboardRouter = createRouter({
     const reports = await db.select().from(attainmentReports);
 
     const totalCOs = reports.length;
-    const attainedCOs = reports.filter((r) => r.isAttained).length;
+    const attainedCOs = reports.filter((r: any) => r.isAttained).length;
     const avgAttainment =
       totalCOs > 0
         ? (
-            reports.reduce((sum, r) => sum + parseFloat(r.finalAttainment), 0) / totalCOs
+            reports.reduce((sum: number, r: any) => sum + parseFloat(r.finalAttainment), 0) / totalCOs
           ).toFixed(2)
         : "0.00";
 
@@ -74,7 +74,7 @@ export const dashboardRouter = createRouter({
         .from(attainmentReports)
         .where(eq(attainmentReports.subjectId, input.subjectId));
 
-      return reports.map((r) => ({
+      return reports.map((r: any) => ({
         coId: r.coId,
         finalAttainment: parseFloat(r.finalAttainment),
         isAttained: r.isAttained,
@@ -84,7 +84,7 @@ export const dashboardRouter = createRouter({
   coStats: publicQuery.query(async () => {
     const db = getDb();
     const cos = await db.select().from(courseOutcomes);
-    const attained = cos.filter((c) => c.isAttained).length;
+    const attained = cos.filter((c: any) => c.isAttained).length;
     return {
       total: cos.length,
       attained,

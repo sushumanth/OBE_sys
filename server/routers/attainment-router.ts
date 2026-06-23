@@ -90,11 +90,11 @@ export const attainmentRouter = createRouter({
         .where(eq(attainmentReports.subjectId, input.subjectId));
 
       const totalCOs = reports.length;
-      const attainedCOs = reports.filter((r) => r.isAttained).length;
+      const attainedCOs = reports.filter((r: any) => r.isAttained).length;
       const avgAttainment =
         totalCOs > 0
           ? (
-              reports.reduce((sum, r) => sum + parseFloat(r.finalAttainment), 0) / totalCOs
+              reports.reduce((sum: number, r: any) => sum + parseFloat(r.finalAttainment), 0) / totalCOs
             ).toFixed(2)
           : "0.00";
 

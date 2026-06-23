@@ -198,7 +198,7 @@ export default function CourseOutcomes() {
                 </div>
               </Card>
             ))
-          : displayCos.map((co) => (
+          : displayCos.map((co: any) => (
               <Card
                 key={co.id}
                 className="border-0 shadow-md rounded-2xl hover:shadow-lg transition-all duration-200 group"

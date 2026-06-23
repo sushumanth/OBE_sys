@@ -39,7 +39,7 @@ export default function ProgramOutcomes() {
 
   const displayPOs = pos && pos.length > 0 ? pos : demoPOs;
   const avgAttainment =
-    displayPOs.reduce((sum, po) => sum + parseFloat(po.attainmentPercent), 0) / displayPOs.length;
+    displayPOs.reduce((sum: number, po: any) => sum + parseFloat(po.attainmentPercent), 0) / displayPOs.length;
 
   function startEdit(po: typeof demoPOs[0]) {
     setEditingId(po.id);
@@ -86,7 +86,7 @@ export default function ProgramOutcomes() {
               <div>
                 <p className="text-sm text-muted-foreground">Above Threshold</p>
                 <p className="text-2xl font-bold text-emerald-600">
-                  {displayPOs.filter((po) => parseFloat(po.attainmentPercent) >= 60).length}
+                  {displayPOs.filter((po: any) => parseFloat(po.attainmentPercent) >= 60).length}
                 </p>
               </div>
               <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-500/20 flex items-center justify-center">
@@ -99,7 +99,7 @@ export default function ProgramOutcomes() {
 
       {/* PO Cards */}
       <div className="grid grid-cols-1 gap-4">
-        {displayPOs.map((po) => (
+        {displayPOs.map((po: any) => (
           <Card key={po.id} className="border-0 shadow-md rounded-2xl">
             <CardContent className="p-5">
               <div className="flex items-start gap-4">

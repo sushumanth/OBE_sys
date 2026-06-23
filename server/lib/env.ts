@@ -1,12 +1,5 @@
 import "dotenv/config";
 
-function required(name: string): string {
-  const value = process.env[name];
-  if (!value && process.env.NODE_ENV === "production") {
-    throw new Error(`Missing required environment variable: ${name}`);
-  }
-  return value ?? "";
-}
 
 if (!process.env.DATABASE_URL && process.env.NODE_ENV === "production") {
   console.warn("[WARNING] DATABASE_URL environment variable is missing. Falling back to the in-memory/mock database.");

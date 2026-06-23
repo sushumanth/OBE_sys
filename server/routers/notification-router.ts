@@ -29,7 +29,7 @@ export const notificationRouter = createRouter({
         .select()
         .from(notifications)
         .where(eq(notifications.userId, input.userId));
-      return result.filter((n) => !n.isRead).length;
+      return result.filter((n: any) => !n.isRead).length;
     }),
 
   create: publicQuery
